@@ -1,0 +1,73 @@
+<h3 class="text-center mt-3">{{appTitle}}</h3>
+
+<div class="text-center">
+    <div class="mt-2">
+        From<input class="mx-3" type="datetime-local" (change)="change('from',$event.target.value)">
+    </div>
+    <div class="mt-2">
+        To<input class="mx-3" type="datetime-local" (change)="change('to',$event.target.value)">
+    </div>
+    <div>
+        <button class="btn btn-sm btn-primary px-4 mt-2" (click)="handleGo()">Go</button>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-stripped mt-4">
+        <thead class="thead-dark">
+            <tr>
+                <th class="table-head" width=20%>Date and Time</th>
+                <th class="table-head" width=15%>Client</th>
+                <th class="table-head" width=10%>Response Code</th>
+                <th class="table-head" with=10%>Response Time</th>
+                <th class="table-head" width=45%>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let log of logs">
+                <td class="table-cell">{{log.datetime}}</td>
+                <td class="table-cell">{{log.client}}</td>
+                <td class="table-cell">{{log.code}}</td>
+                <td class="table-cell">{{log.responseTime}}</td>
+                <td class="table-cell">{{log.url}}</td>
+            </tr>
+        </tbody>
+    </table>
+            <div class="text-center">
+                <button (click)="handlePageChange('prev')" class="btn btn-white border border-secondary mx-5">Previous</button>
+            <span>{{totalPages !==0 ? pageNumber : 0}} / {{totalPages}}</span>
+            <button (click)="handlePageChange('next')"  class="btn btn-primary mx-5">Next</button>
+            </div>
+        <h3 class="text-center mt-5">Search</h3>
+    <div class="text-center">
+        <div class="container text-center">
+            <input style="width:500px;" (change)="searchTextChange($event.target.value)" type="text">
+            <button (click)="handleSearch()">search</button>
+        </div>
+        <div class="text-center mt-3">
+            {{searchLogs.length}} Hits
+        </div>
+        <table class="table table-stripped mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="table-head">Date and Time</th>
+                    <th class="table-head">Client</th>
+                    <th class="table-head">Agent</th>
+                    <th class="table-head">Method</th>
+                    <th class="table-head">URL</th>
+                    <th class="table-head">Response Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let log of searchLogs">
+                    <td class="table-cell">{{log.datetime}}</td>
+                    <td class="table-cell">{{log.client}}</td>
+                    <td class="table-cell">{{log.agent}}</td>
+                    <td class="table-cell">{{log.method}}</td>
+                    <td class="table-cell">{{log.url}}</td>
+                    <td class="table-cell">{{log.code}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

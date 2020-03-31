@@ -1,0 +1,44 @@
+<h3 class="text-center mt-3">{{appTitle}}</h3>
+
+<div class="text-center">
+    <div class="mt-2">
+        From<input class="mx-3" type="datetime-local" (change)="change('from',$event.target.value)">
+    </div>
+    <div class="mt-2">
+        To<input class="mx-3" type="datetime-local" (change)="change('to',$event.target.value)">
+    </div>
+    <div class="mt-2">
+        <button class="btn btn-sm btn-primary px-4 mx-2" (click)="handleGo()">Go</button>
+        <button [ngClass]="live ? 'btn btn-danger' : 'btn btn-secondary'" class="btn-sm px-3 mx-2" (click)="toggleLive()">Live</button>
+        <button class="btn btn-primary btn-sm mx-2" (click)="handleDownload()">Download</button>
+    </div>
+</div>
+<div #pdfContent id="pdf">
+    <div class="text-center">
+        <app-counter title="Counter"  [booking]="counterBooking" [total]="counterTotal"  [schedule]="counterSchedule" [health]="counterHealth"></app-counter>
+        <app-counter title="Last Week Counter"  [booking]="lastWeekBooking" [total]="lastWeekTotal"  [schedule]="lastWeekSchedule" [health]="lastWeekHealth"></app-counter>
+    </div>
+    <div class=".container-fluid d-flex justify-content-around my-4 text-center">
+        <div>
+            <app-pie-chart [pieChartLabels]="botChartLabels" [pieChartData]="botChartData" [pieChartColours]="botChartColors"></app-pie-chart>
+            <h6>Spider Bot Stats</h6>
+        </div>
+        <div>
+            <app-pie-chart [pieChartLabels]="responseCodeChartLabels" [pieChartData]="responseCodeChartData" [pieChartColours]="responseCodeChartColors"></app-pie-chart>
+            <h6>Response Type Stats</h6>
+        </div>
+    </div>
+    <div class="my-5 text-center">
+        <h4>
+            Spider Bots Detailed
+        </h4>
+        <div class="my-4">
+            <button [ngClass]="selectedInterval === 'hour' ? 'btn-primary' : 'btn-secondary'" style="border-radius: 0px;" (click)="changeInterval('hour')" class="btn">Hour</button>
+            <button [ngClass]="selectedInterval === 'day' ? 'btn-primary' : 'btn-secondary'" style="border-radius: 0px;" (click)="changeInterval('day')" class="btn">Day</button>
+            <button [ngClass]="selectedInterval === 'month' ? 'btn-primary' : 'btn-secondary'" style="border-radius: 0px;" (click)="changeInterval('month')" class="btn btn-primary btn">Month</button>
+        </div>
+        <div class="container" >
+            <app-line-chart [lineChartLabels]="botLineChartLabels" [lineChartData]="botLineChartData" [lineChartColors]="botLineChartColors"></app-line-chart>
+        </div>
+    </div>
+</div>
